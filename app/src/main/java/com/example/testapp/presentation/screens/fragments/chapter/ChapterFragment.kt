@@ -28,7 +28,7 @@ class ChapterFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.goButton.setOnClickListener{
-            getRouter().navigateTo(Screens.TaskScreen)
+            getRouter().navigateTo(Screens.task())
         }
 
     }

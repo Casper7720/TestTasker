@@ -1,4 +1,4 @@
-package com.example.testapp.presentation.screens.fragments
+package com.example.testapp.presentation.screens.fragments.task
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,7 +25,7 @@ class TaskFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.goChapter.setOnClickListener{
-            getRouter().navigateTo(Screens.ChapterScreen)
+            getRouter().navigateTo(Screens.chapter())
         }
 
     }

@@ -1,10 +1,12 @@
 package com.example.testapp.presentation
 
 import android.app.Application
+import android.widget.Toast
 import com.github.terrakok.cicerone.Cicerone
 
 
 class App : Application() {
+
     private val cicerone = Cicerone.create()
     val router get() = cicerone.router
     val navigatorHolder get() = cicerone.getNavigatorHolder()
@@ -15,7 +17,6 @@ class App : Application() {
     }
 
     companion object {
-        internal lateinit var INSTANCE: App
-            private set
+        lateinit var INSTANCE: App
     }
 }
