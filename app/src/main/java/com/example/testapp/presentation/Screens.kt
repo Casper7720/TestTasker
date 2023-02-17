@@ -6,6 +6,5 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
     fun chapter() = FragmentScreen{ChapterFragment()}
-
     fun task() = FragmentScreen{ TaskFragment() }
 }

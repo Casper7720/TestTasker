@@ -2,17 +2,16 @@ package com.example.testapp.presentation.screens.activity.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
-import com.example.testapp.R
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
+import com.example.testapp.R
 import com.example.testapp.databinding.ActivityMainBinding
 import com.example.testapp.presentation.App
 import com.example.testapp.presentation.models.LoadingState
 import com.example.testapp.presentation.screens.fragments.chapter.ChapterFragment
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val userViewModel: MainActivityViewModel by viewModels()

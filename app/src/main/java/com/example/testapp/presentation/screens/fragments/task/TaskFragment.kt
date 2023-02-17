@@ -1,32 +1,33 @@
 package com.example.testapp.presentation.screens.fragments.task
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentTaskBinding
-import com.example.testapp.presentation.Screens
 import com.example.testapp.presentation.screens.fragments.base.BaseFragment
 
-class TaskFragment : BaseFragment() {
+class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
+    R.layout.fragment_task
+) {
 
-    private lateinit var binding: FragmentTaskBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentTaskBinding.inflate(layoutInflater)
-        return binding.root
+    override val viewModel: TaskViewModel by viewModels()
+    override val binding: FragmentTaskBinding by viewBinding(FragmentTaskBinding::bind)
+
+
+    override fun initialize() {
+        super.initialize()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupListeners() {
+        super.setupListeners()
+    }
 
-        binding.goChapter.setOnClickListener{
-            getRouter().navigateTo(Screens.chapter())
-        }
+    override fun setupRequests() {
+        super.setupRequests()
+    }
 
+    override fun setupSubscribers() {
+        super.setupSubscribers()
     }
 }

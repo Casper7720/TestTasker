@@ -3,8 +3,9 @@ package com.example.testapp.presentation
 import android.app.Application
 import android.widget.Toast
 import com.github.terrakok.cicerone.Cicerone
+import dagger.hilt.android.HiltAndroidApp
 
-
+@HiltAndroidApp
 class App : Application() {
 
     private val cicerone = Cicerone.create()

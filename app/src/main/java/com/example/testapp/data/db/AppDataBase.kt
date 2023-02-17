@@ -1,11 +1,16 @@
 package com.example.testapp.data.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.testapp.data.dao.UserDao
-import com.example.testapp.data.entity.GitHubUser
+import com.example.testapp.data.dao.FavoriteChapterDao
+import com.example.testapp.data.entity.FavoriteChapterEntity
+import dagger.Provides
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Singleton
 
-@Database(entities = [GitHubUser::class], version = 1, exportSchema = false)
+@Database(entities = [FavoriteChapterEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract val userDao: UserDao
+    abstract val favoriteChapterDao: FavoriteChapterDao
 }
