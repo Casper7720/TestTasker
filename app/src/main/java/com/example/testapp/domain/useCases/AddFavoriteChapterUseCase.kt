@@ -11,6 +11,4 @@ class AddFavoriteChapterUseCase @Inject constructor(
 ) {
     operator fun invoke(id: Long, name: String): Flow<Either<String, Boolean>> =
         favoriteChapterRepository.addFavoriteChapter(FavoriteChapterEntity(id, name))
-
-
 }

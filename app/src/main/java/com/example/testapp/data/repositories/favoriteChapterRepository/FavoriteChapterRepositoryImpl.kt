@@ -23,4 +23,9 @@ class FavoriteChapterRepositoryImpl @Inject constructor(
             true
         }
 
+    override fun addDefaultChapters(chaptersEntity: List<FavoriteChapterEntity>): Flow<Either<String, Boolean>> =
+        doRequest {
+            favoriteChapterDao.add(chaptersEntity)
+            true
+        }
 }

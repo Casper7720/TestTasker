@@ -11,5 +11,4 @@ class GetFavoriteChaptersUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<Either<String, List<FavoriteChapterEntity>>> =
         favoriteChapterRepository.getAll()
-
 }

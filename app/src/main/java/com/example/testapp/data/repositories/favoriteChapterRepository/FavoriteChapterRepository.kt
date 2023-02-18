@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface FavoriteChapterRepository {
     fun getAll() : Flow<Either<String, List<FavoriteChapterEntity>>>
     fun addFavoriteChapter(chapterEntity: FavoriteChapterEntity): Flow<Either<String, Boolean>>
+    fun addDefaultChapters(chaptersEntity: List<FavoriteChapterEntity>): Flow<Either<String, Boolean>>
 }
