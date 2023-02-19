@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentChapterBinding
+import com.example.testapp.presentation.Screens
 import com.example.testapp.presentation.models.ChapterItem
 import com.example.testapp.presentation.screens.fragments.base.BaseFragment
-import com.example.testapp.presentation.screens.fragments.task.adapter.ChapterAdapter
-import com.example.testapp.presentation.screens.fragments.task.adapter.ChapterItemDU
-import com.example.testapp.presentation.screens.fragments.task.adapter.ChapterVH
+import com.example.testapp.presentation.screens.fragments.chapter.adapter.ChapterAdapter
+import com.example.testapp.presentation.screens.fragments.chapter.adapter.ChapterItemDU
+import com.example.testapp.presentation.screens.fragments.chapter.adapter.ChapterVH
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +42,7 @@ class ChapterFragment : BaseFragment<ChapterViewModel, FragmentChapterBinding>(
 
         favoriteChapterAdapter.setListener(object: ChapterVH.ChapterItemListener{
             override fun onColorClick() {
-                Toast.makeText(context, "", Toast.LENGTH_LONG).show()
+                getRouter().navigateTo(Screens.task())
             }
 
         })

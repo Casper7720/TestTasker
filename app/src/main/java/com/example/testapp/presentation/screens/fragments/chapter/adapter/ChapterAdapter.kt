@@ -1,4 +1,4 @@
-package com.example.testapp.presentation.screens.fragments.task.adapter
+package com.example.testapp.presentation.screens.fragments.chapter.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
