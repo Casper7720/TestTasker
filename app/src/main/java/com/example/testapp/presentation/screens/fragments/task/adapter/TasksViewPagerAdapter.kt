@@ -19,10 +19,15 @@ class TasksViewPagerAdapter(
     ) : PagerAdapter() {
 
     private lateinit var adapter: TasksAdapter
+    private lateinit var listener: TasksVH.TaskItemListener
 
     fun setData(list: List<List<TaskItem>>){
         this.tasks = list
         notifyDataSetChanged()
+    }
+
+    fun setTaskListener(listener: TasksVH.TaskItemListener){
+        this.listener = listener
     }
 
     override fun getCount(): Int = tasks.size
@@ -36,6 +41,7 @@ class TasksViewPagerAdapter(
 
         adapter = TasksAdapter()
         adapter.setData(tasks[position])
+        adapter.setListener(listener)
 
         taskRv = itemView.findViewById(R.id.tasks_rv)
 

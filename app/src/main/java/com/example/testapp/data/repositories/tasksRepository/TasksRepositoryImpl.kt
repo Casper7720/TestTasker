@@ -28,4 +28,9 @@ class TasksRepositoryImpl @Inject constructor(
             true
         }
 
+    override fun deleteTask(id: Long): Flow<Either<String, Boolean>> =
+        doRequest {
+            tasksDao.deleteById(id)
+            true
+        }
 }

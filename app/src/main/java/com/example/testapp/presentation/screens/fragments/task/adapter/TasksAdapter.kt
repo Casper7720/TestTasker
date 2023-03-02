@@ -3,6 +3,7 @@ package com.example.testapp.presentation.screens.fragments.task.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -43,11 +44,16 @@ class TasksVH(val view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(item: TaskItem, listener: TaskItemListener?) {
         val title = view.findViewById<TextView>(R.id.task_title)
+        val checkBox = view.findViewById<CheckBox>(R.id.tasks_cb)
         title.text = item.text
+
+        checkBox.setOnClickListener{
+            listener?.delete(item.id)
+        }
     }
 
     interface TaskItemListener{
-        fun onColorClick()
+        fun delete(id: Long)
     }
 
     companion object {

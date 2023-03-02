@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface TasksRepository {
     fun getAll(): Flow<Either<String, List<TaskItem>>>
     fun addTask(taskEntity: TaskEntity): Flow<Either<String, Boolean>>
+    fun deleteTask(id: Long): Flow<Either<String, Boolean>>
 }

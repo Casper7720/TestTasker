@@ -2,6 +2,7 @@ package com.example.testapp.presentation.screens.fragments.task
 
 import com.example.testapp.data.entity.TaskEntity
 import com.example.testapp.domain.useCases.tasks.AddTaskUseCase
+import com.example.testapp.domain.useCases.tasks.DeleteTaskUseCase
 import com.example.testapp.domain.useCases.tasks.GetAllTasksUseCase
 import com.example.testapp.presentation.models.TaskItem
 import com.example.testapp.presentation.screens.fragments.base.BaseViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TaskViewModel @Inject constructor(
     private val addTaskUseCase: @JvmSuppressWildcards AddTaskUseCase,
-    private val getAllTasksUseCase: @JvmSuppressWildcards GetAllTasksUseCase
+    private val getAllTasksUseCase: @JvmSuppressWildcards GetAllTasksUseCase,
+    private val deleteTaskUseCase: @JvmSuppressWildcards DeleteTaskUseCase,
 ) : BaseViewModel() {
 
     private val _addTasks = MutableUIStateFlow<Boolean>()
@@ -21,6 +23,9 @@ class TaskViewModel @Inject constructor(
 
     private val _allTasks = MutableUIStateFlow<List<TaskItem>>()
     val allTasks = _allTasks.asStateFlow()
+
+    private val _deleteTask = MutableUIStateFlow<Boolean>()
+    val deleteTask = _deleteTask.asStateFlow()
 
     fun getTasks() {
         getAllTasksUseCase().collectRequest(_allTasks) { it }
@@ -32,5 +37,9 @@ class TaskViewModel @Inject constructor(
                 id, title, date
             )
         ).collectRequest(_addTasks) { it }
+    }
+
+    fun deleteTask(id: Long){
+        deleteTaskUseCase(id).collectRequest(_deleteTask){it}
     }
 }

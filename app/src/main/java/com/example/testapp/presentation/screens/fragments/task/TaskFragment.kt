@@ -10,6 +10,7 @@ import com.example.testapp.presentation.dialogs.AddTaskDialog
 import com.example.testapp.presentation.dialogs.AddTaskListener
 import com.example.testapp.presentation.models.TaskItem
 import com.example.testapp.presentation.screens.fragments.base.BaseFragment
+import com.example.testapp.presentation.screens.fragments.task.adapter.TasksVH
 import com.example.testapp.presentation.screens.fragments.task.adapter.TasksViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -35,6 +36,12 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
             inflateMenu(R.menu.menu_tasks)
         }
         adapterViewPager = TasksViewPagerAdapter(requireContext(), listOf())
+        adapterViewPager.setTaskListener(object : TasksVH.TaskItemListener {
+            override fun delete(id: Long) {
+                viewModel.deleteTask(id)
+            }
+
+        })
         binding.tasksVp.apply {
             adapter = adapterViewPager
         }
@@ -86,5 +93,15 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
             onSuccess = {
                 setDataViewPager(listOf(it))
             })
+
+        viewModel.deleteTask.collectUIState(
+            state = {},
+            onError = {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            },
+            onSuccess = {
+                viewModel.getTasks()
+            }
+        )
     }
 }
