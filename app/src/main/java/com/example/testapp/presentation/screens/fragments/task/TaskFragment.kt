@@ -60,7 +60,7 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
         binding.addNewTask.setOnClickListener {
             val dialog = AddTaskDialog()
             dialog.setListener(object : AddTaskListener {
-                override fun onAddTaskClick(title: String, date: Date?) {
+                override fun onAddTaskClick(title: String, date: Calendar?) {
                     viewModel.addTask(System.currentTimeMillis(), title, date)
                 }
             })

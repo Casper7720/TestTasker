@@ -8,19 +8,19 @@ import java.util.*
 
 @ProvidedTypeConverter
 class Converters {
-    private val dateTokenType = object : TypeToken<Date>() {}.type
+    private val calendarTokenType = object : TypeToken<Calendar>() {}.type
 
     @TypeConverter
-    fun stringToDate(value: String?): Date? {
+    fun stringToCalendar(value: String?): Calendar? {
         value ?: return null
-        return Gson().fromJson(value, dateTokenType)
+        return Gson().fromJson(value, calendarTokenType)
     }
 
     @TypeConverter
-    fun dateToString(priceInfo: Date?): String? {
+    fun calendarToString(priceInfo: Calendar?): String? {
         priceInfo ?: return null
         val gson = Gson()
-        return gson.toJson(priceInfo, dateTokenType)
+        return gson.toJson(priceInfo, calendarTokenType)
     }
 
 }

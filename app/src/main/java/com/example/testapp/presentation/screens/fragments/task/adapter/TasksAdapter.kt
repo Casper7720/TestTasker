@@ -1,19 +1,18 @@
 package com.example.testapp.presentation.screens.fragments.task.adapter
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
-import com.example.testapp.presentation.models.ChapterItem
 import com.example.testapp.presentation.models.TaskItem
 
-class TasksAdapter: ListAdapter<TaskItem, TasksVH>(TaskItemDU()) {
+class TasksAdapter : ListAdapter<TaskItem, TasksVH>(TaskItemDU()) {
 
     private var list: List<TaskItem> = ArrayList()
     private var listener: TasksVH.TaskItemListener? = null
@@ -23,7 +22,7 @@ class TasksAdapter: ListAdapter<TaskItem, TasksVH>(TaskItemDU()) {
         submitList(this.list)
     }
 
-    fun setListener(listener: TasksVH.TaskItemListener){
+    fun setListener(listener: TasksVH.TaskItemListener) {
         this.listener = listener
     }
 
@@ -45,14 +44,20 @@ class TasksVH(val view: View) : RecyclerView.ViewHolder(view) {
     fun bind(item: TaskItem, listener: TaskItemListener?) {
         val title = view.findViewById<TextView>(R.id.task_title)
         val checkBox = view.findViewById<CheckBox>(R.id.tasks_cb)
+        val date = view.findViewById<TextView>(R.id.task_date)
         title.text = item.text
+        date.text = DateUtils.formatDateTime(
+            view.context,
+            item.date?.timeInMillis ?: 0L,
+            DateUtils.FORMAT_SHOW_DATE
+        )
 
-        checkBox.setOnClickListener{
+        checkBox.setOnClickListener {
             listener?.delete(item.id)
         }
     }
 
-    interface TaskItemListener{
+    interface TaskItemListener {
         fun delete(id: Long)
     }
 
@@ -66,7 +71,7 @@ class TasksVH(val view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
-class TaskItemDU : DiffUtil.ItemCallback<TaskItem>(){
+class TaskItemDU : DiffUtil.ItemCallback<TaskItem>() {
     override fun areItemsTheSame(oldItem: TaskItem, newItem: TaskItem): Boolean =
         oldItem == newItem
 
