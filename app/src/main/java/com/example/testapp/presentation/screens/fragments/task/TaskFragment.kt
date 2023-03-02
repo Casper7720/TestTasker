@@ -6,11 +6,12 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentTaskBinding
+import com.example.testapp.presentation.dialogs.AddTaskDialog
+import com.example.testapp.presentation.dialogs.AddTaskListener
 import com.example.testapp.presentation.models.TaskItem
 import com.example.testapp.presentation.screens.fragments.base.BaseFragment
 import com.example.testapp.presentation.screens.fragments.task.adapter.TasksViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.Instant
 import java.util.*
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
 
     }
 
-    private fun setDataViewPager(list: List<List<TaskItem>>){
+    private fun setDataViewPager(list: List<List<TaskItem>>) {
         adapterViewPager.setData(list)
     }
 
@@ -50,12 +51,13 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
         super.setupListeners()
 
         binding.addNewTask.setOnClickListener {
-            viewModel.addTask(
-                0,
-                "2134",
-                Date.from(Instant.now())
-            )
-            viewModel.getTasks()
+            val dialog = AddTaskDialog()
+            dialog.setListener(object : AddTaskListener {
+                override fun onAddTaskClick(title: String, date: Date?) {
+                    viewModel.addTask(System.currentTimeMillis(), title, date)
+                }
+            })
+            dialog.show(parentFragmentManager, "addTask")
         }
     }
 
@@ -65,6 +67,16 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
 
     override fun setupSubscribers() {
         super.setupSubscribers()
+
+        viewModel.addTask.collectUIState(
+            state = {},
+            onError = {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            },
+            onSuccess = {
+                viewModel.getTasks()
+            }
+        )
 
         viewModel.allTasks.collectUIState(
             state = {},

@@ -16,7 +16,9 @@
         <activity
             android:name=".presentation.screens.activity.main.MainActivity"
             android:exported="true"
-            android:theme="@style/splashTheme">
+            android:theme="@style/splashTheme"
+            android:screenOrientation="fullSensor"
+            android:resizeableActivity="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

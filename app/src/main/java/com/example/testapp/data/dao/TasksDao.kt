@@ -11,6 +11,10 @@ interface TasksDao {
     @Query("SELECT * FROM taskEntity")
     fun findAll(): List<TaskEntity>
 
+
+    @Query("DELETE FROM taskEntity WHERE id = :id")
+    fun deleteByUserId(id: Long)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(task: TaskEntity)
 

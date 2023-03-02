@@ -26,7 +26,7 @@ class TaskViewModel @Inject constructor(
         getAllTasksUseCase().collectRequest(_allTasks) { it }
     }
 
-    fun addTask(id: Long, title: String, date: Date) {
+    fun addTask(id: Long, title: String, date: Date?) {
         addTaskUseCase(
             TaskEntity(
                 id, title, date
