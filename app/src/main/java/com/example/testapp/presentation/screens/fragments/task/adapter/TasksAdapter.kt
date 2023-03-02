@@ -45,11 +45,14 @@ class TasksVH(val view: View) : RecyclerView.ViewHolder(view) {
         val title = view.findViewById<TextView>(R.id.task_title)
         val checkBox = view.findViewById<CheckBox>(R.id.tasks_cb)
         val date = view.findViewById<TextView>(R.id.task_date)
+
+        val flags = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME
+
         title.text = item.text
         date.text = DateUtils.formatDateTime(
             view.context,
             item.date?.timeInMillis ?: 0L,
-            DateUtils.FORMAT_SHOW_DATE
+            flags
         )
 
         checkBox.setOnClickListener {

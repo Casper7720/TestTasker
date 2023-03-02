@@ -1,6 +1,7 @@
 package com.example.testapp.presentation.dialogs
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +56,8 @@ class AddTaskDialog : BottomSheetDialogFragment() {
                 dateAndTime.set(Calendar.YEAR, year)
                 dateAndTime.set(Calendar.MONTH, month + 1)
                 dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                showTimeDialog()
             }
 
         DatePickerDialog(
@@ -63,6 +66,21 @@ class AddTaskDialog : BottomSheetDialogFragment() {
             dateAndTime.get(Calendar.YEAR),
             dateAndTime.get(Calendar.MONTH),
             dateAndTime.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+    private fun showTimeDialog(){
+        val timeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+            dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            dateAndTime.set(Calendar.MINUTE, minute)
+        }
+
+        TimePickerDialog(
+            requireContext(),
+            timeListener,
+            dateAndTime.get(Calendar.HOUR_OF_DAY),
+            dateAndTime.get(Calendar.MINUTE),
+            true
         ).show()
     }
 
