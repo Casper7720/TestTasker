@@ -13,13 +13,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
-    private val addTaskUseCase: @JvmSuppressWildcards AddTaskUseCase,
     private val getAllTasksUseCase: @JvmSuppressWildcards GetAllTasksUseCase,
     private val deleteTaskUseCase: @JvmSuppressWildcards DeleteTaskUseCase,
 ) : BaseViewModel() {
-
-    private val _addTasks = MutableUIStateFlow<Boolean>()
-    val addTask = _addTasks.asStateFlow()
 
     private val _allTasks = MutableUIStateFlow<List<TaskItem>>()
     val allTasks = _allTasks.asStateFlow()
@@ -29,14 +25,6 @@ class TaskViewModel @Inject constructor(
 
     fun getTasks() {
         getAllTasksUseCase().collectRequest(_allTasks) { it }
-    }
-
-    fun addTask(id: Long, title: String, date: Calendar?) {
-        addTaskUseCase(
-            TaskEntity(
-                id, title, date
-            )
-        ).collectRequest(_addTasks) { it }
     }
 
     fun deleteTask(id: Long){

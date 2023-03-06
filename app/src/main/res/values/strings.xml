@@ -10,4 +10,6 @@
     <string name="more">more</string>
     <string name="date">Дата</string>
     <string name="task_title">Текст задачи</string>
+    <string name="channelName">Channel_name</string>
+    <string name="channel_description">channel_description</string>
 </resources>
