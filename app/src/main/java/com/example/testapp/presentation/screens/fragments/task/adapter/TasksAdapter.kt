@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.example.testapp.R
 import com.example.testapp.presentation.models.TaskItem
 
@@ -57,6 +58,9 @@ class TasksVH(val view: View) : RecyclerView.ViewHolder(view) {
 
         checkBox.setOnClickListener {
             listener?.delete(item.id)
+            if (item.notificationTag != null) {
+                WorkManager.getInstance(view.context).cancelAllWorkByTag(item.notificationTag ?: "")
+            }
         }
     }
 

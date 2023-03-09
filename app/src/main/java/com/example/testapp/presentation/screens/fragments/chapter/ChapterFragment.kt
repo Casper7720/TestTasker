@@ -30,6 +30,7 @@ class ChapterFragment : BaseFragment<ChapterViewModel, FragmentChapterBinding>(
 
         binding.toolbar.apply {
             setNavigationIcon(R.drawable.ic_done)
+            title = "Tasker"
             setNavigationOnClickListener {
                 viewModel.addChapter()
             }

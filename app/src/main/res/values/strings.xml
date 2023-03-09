@@ -10,6 +10,11 @@
     <string name="more">more</string>
     <string name="date">Дата</string>
     <string name="task_title">Текст задачи</string>
+    <string name="task_toolbar_title">Задачи</string>
     <string name="channelName">Channel_name</string>
     <string name="channel_description">channel_description</string>
+    <string name="all">Все</string>
+    <string name="today">Сегодня</string>
+    <string name="go">go</string>
+    <string name="tasker">Tasker</string>
 </resources>

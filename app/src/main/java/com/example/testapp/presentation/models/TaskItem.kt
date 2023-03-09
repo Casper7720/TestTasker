@@ -5,5 +5,6 @@ import java.util.*
 data class TaskItem(
     var id: Long,
     var text: String,
-    var date: Calendar?
+    var date: Calendar?,
+    var notificationTag: String?,
 )

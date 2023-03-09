@@ -38,6 +38,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(
             commit()
         }
 
+
     }
 
     override fun setupListeners() {

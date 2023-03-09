@@ -12,6 +12,5 @@ data class TaskEntity(
     @PrimaryKey val id: Long,
     val title: String,
     val date: Calendar?,
-
-
+    var notificationTag: String?,
 )

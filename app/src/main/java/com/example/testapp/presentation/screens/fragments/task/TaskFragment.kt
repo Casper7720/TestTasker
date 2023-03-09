@@ -2,27 +2,17 @@ package com.example.testapp.presentation.screens.fragments.task
 
 
 import android.widget.Toast
-import androidx.fragment.app.FragmentResultOwner
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.FragmentTaskBinding
-import com.example.testapp.presentation.NotifyWorker
-import com.example.testapp.presentation.NotifyWorker.Companion.NOTIFICATION_WORK
-import com.example.testapp.presentation.dialogs.AddTaskDialog
+import com.example.testapp.presentation.dialogs.addTask.AddTaskDialog
 import com.example.testapp.presentation.models.TaskItem
 import com.example.testapp.presentation.screens.fragments.base.BaseFragment
 import com.example.testapp.presentation.screens.fragments.task.adapter.TasksVH
 import com.example.testapp.presentation.screens.fragments.task.adapter.TasksViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.System.currentTimeMillis
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 @AndroidEntryPoint
@@ -39,6 +29,7 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
         super.initialize()
         binding.toolbar.apply {
             setNavigationIcon(R.drawable.ic_back)
+            title = getString(R.string.task_toolbar_title)
             setNavigationOnClickListener {
                 getRouter().exit()
             }
@@ -54,6 +45,8 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
         binding.tasksVp.apply {
             adapter = adapterViewPager
         }
+        binding.tabLayout.setupWithViewPager(binding.tasksVp)
+
         viewModel.getTasks()
 
         setFragmentResultListener("REQUEST_ADD_TASK"){key, bundle ->
@@ -92,7 +85,7 @@ class TaskFragment : BaseFragment<TaskViewModel, FragmentTaskBinding>(
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
             },
             onSuccess = {
-                setDataViewPager(listOf(it))
+                setDataViewPager(it)
             })
 
         viewModel.deleteTask.collectUIState(

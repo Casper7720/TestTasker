@@ -16,10 +16,10 @@ class AddTaskViewModel @Inject constructor(
     private val _addTasks = MutableUIStateFlow<Boolean>()
     val addTask = _addTasks.asStateFlow()
 
-    fun addTask(id: Long, title: String, date: Calendar?) {
+    fun addTask(id: Long, title: String, date: Calendar?, notificationTag: String?) {
         addTaskUseCase(
             TaskEntity(
-                id, title, date
+                id, title, date, notificationTag
             )
         ).collectRequest(_addTasks) { it }
     }

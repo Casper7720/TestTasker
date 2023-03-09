@@ -49,7 +49,7 @@ class NotifyWorker(context: Context, params: WorkerParameters) : Worker(context,
         val notification = NotificationCompat.Builder(
             applicationContext, NOTIFICATION_CHANNEL
         )
-            .setSmallIcon(R.drawable.ic_notification)
+            .setSmallIcon(R.drawable.ic_tasker)
             .setContentTitle(titleNotification)
             .setContentText(subtitleNotification)
             .setDefaults(DEFAULT_ALL)

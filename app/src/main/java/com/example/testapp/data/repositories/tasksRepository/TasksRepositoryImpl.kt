@@ -17,9 +17,10 @@ class TasksRepositoryImpl @Inject constructor(
                 TaskItem(
                     it.id,
                     it.title,
-                    it.date
+                    it.date,
+                    it.notificationTag
                 )
-            }
+            }.sortedBy { it.date }
         }
 
     override fun addTask(taskEntity: TaskEntity): Flow<Either<String, Boolean>> =

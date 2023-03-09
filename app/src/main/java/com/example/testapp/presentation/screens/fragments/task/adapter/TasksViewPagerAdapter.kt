@@ -16,17 +16,17 @@ import com.example.testapp.presentation.models.TaskItem
 class TasksViewPagerAdapter(
     val context: Context,
     var tasks: List<List<TaskItem>>
-    ) : PagerAdapter() {
+) : PagerAdapter() {
 
     private lateinit var adapter: TasksAdapter
     private lateinit var listener: TasksVH.TaskItemListener
 
-    fun setData(list: List<List<TaskItem>>){
+    fun setData(list: List<List<TaskItem>>) {
         this.tasks = list
         notifyDataSetChanged()
     }
 
-    fun setTaskListener(listener: TasksVH.TaskItemListener){
+    fun setTaskListener(listener: TasksVH.TaskItemListener) {
         this.listener = listener
     }
 
@@ -51,6 +51,13 @@ class TasksViewPagerAdapter(
 
         container.addView(itemView)
         return itemView
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return if (position == 0)
+            context.getString(R.string.all)
+        else
+            context.getString(R.string.today)
     }
 
     override fun getItemPosition(`object`: Any): Int {

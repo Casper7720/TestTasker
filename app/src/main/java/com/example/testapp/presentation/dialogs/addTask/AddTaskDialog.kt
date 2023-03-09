@@ -1,11 +1,8 @@
-package com.example.testapp.presentation.dialogs
+package com.example.testapp.presentation.dialogs.addTask
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.work.Data
@@ -15,11 +12,8 @@ import androidx.work.WorkManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.DialogAddTaskBinding
-import com.example.testapp.databinding.FragmentTaskBinding
 import com.example.testapp.presentation.NotifyWorker
-import com.example.testapp.presentation.dialogs.addTask.AddTaskViewModel
 import com.example.testapp.presentation.dialogs.bottomSheetBase.BaseBottomSheetDialogFragment
-import com.example.testapp.presentation.screens.fragments.task.TaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.ZoneId
 import java.util.*
@@ -45,7 +39,15 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
         super.setupListeners()
 
         binding.completeCreateTask.setOnClickListener {
-            viewModel.addTask(System.currentTimeMillis(), binding.taskTitle.text.toString(), dateAndTime)
+
+            val delay = dateAndTime.timeInMillis - System.currentTimeMillis()
+
+            viewModel.addTask(
+                System.currentTimeMillis(),
+                binding.taskTitle.text.toString(),
+                dateAndTime,
+                delay.toString()
+            )
 
             val data =
                 Data.Builder()
@@ -55,11 +57,11 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
                     )
                     .putString(NotifyWorker.NOTIFICATION_TITLE, binding.taskTitle.text.toString())
                     .build()
-            val delay = dateAndTime.timeInMillis - System.currentTimeMillis()
-            if(delay > 0){
+
+            if (delay > 0) {
                 scheduleNotification(delay, data)
             }
-            
+
             val bundle = Bundle()
             bundle.putBoolean("add_task", true)
             setFragmentResult("REQUEST_ADD_TASK", bundle)
@@ -83,6 +85,7 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
 
     private fun scheduleNotification(delay: Long, data: Data) {
         val notificationWork = OneTimeWorkRequest.Builder(NotifyWorker::class.java)
+            .addTag(delay.toString())
             .setInitialDelay(delay, TimeUnit.MILLISECONDS).setInputData(data).build()
 
         val instanceWorkManager = WorkManager.getInstance(requireContext())
