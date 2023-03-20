@@ -1,19 +1,16 @@
 package com.example.testapp.presentation.screens.activity.main
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.ActivityMainBinding
-import com.example.testapp.databinding.FragmentChapterBinding
 import com.example.testapp.presentation.App
-import com.example.testapp.presentation.models.LoadingState
+import com.example.testapp.presentation.NotifyWorker
+import com.example.testapp.presentation.Screens
 import com.example.testapp.presentation.screens.activity.base.BaseActivity
-import com.example.testapp.presentation.screens.fragments.chapter.ChapterFragment
-import com.example.testapp.presentation.screens.fragments.chapter.ChapterViewModel
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,15 +27,14 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(
     override fun initialize() {
         super.initialize()
 
-        viewModel.addDefaultData()
-
-        val chapter = ChapterFragment()
-        supportFragmentManager.beginTransaction().apply {
-            add(binding.fragmentContainer.id, chapter)
-            commit()
+        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        val firstStep = sharedPref.getInt(getString(R.string.first_step), 1)
+        if (firstStep == 1) {
+            viewModel.addDefaultData()
+            sharedPref.edit().putInt(getString(R.string.first_step), firstStep + 1).apply()
         }
 
-
+        getRouter().navigateTo(Screens.chapter())
     }
 
     override fun setupListeners() {

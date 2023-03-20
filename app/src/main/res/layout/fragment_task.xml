@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:tabIndicatorColor="@color/pink"
-        app:tabSelectedTextColor="@color/pink"
+        app:tabIndicatorColor="@color/pinkBase"
+        app:tabSelectedTextColor="@color/pinkBase"
         app:tabTextColor="@color/gray" />
 
     <androidx.viewpager.widget.ViewPager

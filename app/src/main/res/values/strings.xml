@@ -17,4 +17,5 @@
     <string name="today">Сегодня</string>
     <string name="go">go</string>
     <string name="tasker">Tasker</string>
+    <string name="first_step">first_step</string>
 </resources>

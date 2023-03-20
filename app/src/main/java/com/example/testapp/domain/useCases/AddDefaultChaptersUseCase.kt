@@ -17,10 +17,6 @@ class AddDefaultChaptersUseCase @Inject constructor(
                     "Входящие"
                 ),
                 FavoriteChapterEntity(
-                    1,
-                    "Сегодня"
-                ),
-                FavoriteChapterEntity(
                     2,
                     "Предстоящие"
                 ),

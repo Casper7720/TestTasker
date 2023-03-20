@@ -20,6 +20,7 @@ import android.media.RingtoneManager.getDefaultUri
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.O
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.ListenableWorker.Result.success
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -28,7 +29,7 @@ import com.example.testapp.presentation.screens.activity.main.MainActivity
 
 class NotifyWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
     override fun doWork():Result {
-        val id = inputData.getLong(NOTIFICATION_ID, 0).toInt()
+        val id = inputData.getInt(NOTIFICATION_ID, 0)
         sendNotification(id)
 
         return success()

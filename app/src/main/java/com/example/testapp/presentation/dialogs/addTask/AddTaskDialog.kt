@@ -3,6 +3,7 @@ package com.example.testapp.presentation.dialogs.addTask
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.work.Data
@@ -55,6 +56,7 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
                         NotifyWorker.NOTIFICATION_DESCRIPTION,
                         "Необходимо выполнить задачу"
                     )
+                    .putInt(NotifyWorker.NOTIFICATION_ID,1)
                     .putString(NotifyWorker.NOTIFICATION_TITLE, binding.taskTitle.text.toString())
                     .build()
 
