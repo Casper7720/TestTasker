@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
+import com.example.testapp.R
 import com.example.testapp.presentation.App
 import com.example.testapp.presentation.models.UIState
 import com.github.terrakok.cicerone.Router
@@ -29,6 +30,8 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        view.rootView.setBackgroundColor(requireContext().getColor(R.color.baseGray))
 
         initialize()
         setupListeners()

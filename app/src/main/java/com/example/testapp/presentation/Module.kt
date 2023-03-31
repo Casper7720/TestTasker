@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import com.example.testapp.data.Converters
 import com.example.testapp.data.dao.FavoriteChapterDao
+import com.example.testapp.data.dao.NotificationDao
 import com.example.testapp.data.dao.TasksDao
 import com.example.testapp.data.db.AppDatabase
 import com.example.testapp.data.repositories.favoriteChapterRepository.FavoriteChapterRepository
 import com.example.testapp.data.repositories.favoriteChapterRepository.FavoriteChapterRepositoryImpl
+import com.example.testapp.data.repositories.notificationRepository.NotificationRepository
+import com.example.testapp.data.repositories.notificationRepository.NotificationRepositoryImpl
 import com.example.testapp.data.repositories.tasksRepository.TasksRepository
 import com.example.testapp.data.repositories.tasksRepository.TasksRepositoryImpl
 import dagger.Binds
@@ -43,6 +46,9 @@ abstract class RepositoriesModule {
 
     @Binds
     abstract fun bindTasksRepository(tasksRepository: TasksRepositoryImpl): TasksRepository
+
+    @Binds
+    abstract fun bindNotificationRepository(notificationRepository: NotificationRepositoryImpl): NotificationRepository
 }
 
 @InstallIn(SingletonComponent::class)
@@ -55,6 +61,9 @@ class DatabaseModule {
 
     @Provides
     fun provideTasksDao(appDatabase: AppDatabase): TasksDao = appDatabase.tasksDao
+
+    @Provides
+    fun provideNotificationDao(appDatabase: AppDatabase): NotificationDao = appDatabase.notificationDao
 
     @Singleton
     @Provides

@@ -6,12 +6,12 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:allowBackup="true"
         android:name=".presentation.App"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_tasker"
@@ -23,9 +23,9 @@
         <activity
             android:name=".presentation.screens.activity.main.MainActivity"
             android:exported="true"
-            android:theme="@style/splashTheme"
+            android:resizeableActivity="true"
             android:screenOrientation="portrait"
-            android:resizeableActivity="true">
+            android:theme="@style/splashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,6 +36,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <receiver android:name=".presentation.AlarmReceiver" />
     </application>
 
 </manifest>

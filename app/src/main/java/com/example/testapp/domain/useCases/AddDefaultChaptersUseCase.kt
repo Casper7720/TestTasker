@@ -9,7 +9,7 @@ import javax.inject.Inject
 class AddDefaultChaptersUseCase @Inject constructor(
     private val favoriteChapterRepository: FavoriteChapterRepository
 ) {
-    operator fun invoke(): Flow<Either<String, Boolean>> =
+    operator fun invoke() =
         favoriteChapterRepository.addDefaultChapters(
             listOf(
                 FavoriteChapterEntity(

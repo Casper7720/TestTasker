@@ -1,14 +1,12 @@
 package com.example.testapp.presentation.screens.activity.main
 
 import android.content.Context
-import android.content.Intent
 import android.widget.Toast
 import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.ActivityMainBinding
 import com.example.testapp.presentation.App
-import com.example.testapp.presentation.NotifyWorker
 import com.example.testapp.presentation.Screens
 import com.example.testapp.presentation.screens.activity.base.BaseActivity
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -48,13 +46,21 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(
     override fun setupSubscribers() {
         super.setupSubscribers()
 
-        viewModel.defaultData.collectUIState(
+        viewModel.defaultChapters.collectUIState(
             state = {},
+            onSuccess = {},
             onError = {
-                Toast.makeText(baseContext, it, Toast.LENGTH_LONG).show()
-            },
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        )
+
+        viewModel.defaultDayNightNotifications.collectUIState(
+            state = {},
             onSuccess = {
                 setTheme(R.style.Theme_TestApp)
+            },
+            onError = {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
             }
         )
 

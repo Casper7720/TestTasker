@@ -16,23 +16,25 @@ class TaskViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _allTasks = MutableUIStateFlow<List<List<TaskItem>>>()
-    val allTasks = _allTasks.asStateFlow()
+    var allTasks = _allTasks.asStateFlow()
+    var allTasksList: List<TaskItem> = listOf()
 
     private val _deleteTask = MutableUIStateFlow<Boolean>()
     val deleteTask = _deleteTask.asStateFlow()
 
     fun getTasks() {
         getAllTasksUseCase().collectRequest(_allTasks) {
+            allTasksList =it
             val listTasks: MutableList<MutableList<TaskItem>> = mutableListOf(mutableListOf())
-            val date = Calendar.getInstance()
-            it.forEach { it ->
-                if (it.date?.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+            val date = GregorianCalendar.getInstance()
+            it.forEach { item ->
+                if (item.date?.get(GregorianCalendar.DAY_OF_MONTH) == date.get(GregorianCalendar.DAY_OF_MONTH)) {
                     if(listTasks.size == 1){
                         listTasks.add(mutableListOf())
                     }
-                    listTasks[1].add(it)
+                    listTasks[1].add(item)
                 }
-                listTasks[0].add(it)
+                listTasks[0].add(item)
 
             }
             listTasks

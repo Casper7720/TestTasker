@@ -8,6 +8,7 @@ import java.util.*
 
 @ProvidedTypeConverter
 class Converters {
+    //Calendar
     private val calendarTokenType = object : TypeToken<Calendar>() {}.type
 
     @TypeConverter
@@ -21,6 +22,21 @@ class Converters {
         priceInfo ?: return null
         val gson = Gson()
         return gson.toJson(priceInfo, calendarTokenType)
+    }
+
+    //GregorianCalendar
+    private val gregorianCalendarTolenType = object : TypeToken<GregorianCalendar>() {}.type
+    @TypeConverter
+    fun stringToGregorianCalendar(value: String?): GregorianCalendar? {
+        value ?: return null
+        return Gson().fromJson(value, gregorianCalendarTolenType)
+    }
+
+    @TypeConverter
+    fun gregorianCalendarToString(priceInfo: GregorianCalendar?): String? {
+        priceInfo ?: return null
+        val gson = Gson()
+        return gson.toJson(priceInfo, gregorianCalendarTolenType)
     }
 
 }

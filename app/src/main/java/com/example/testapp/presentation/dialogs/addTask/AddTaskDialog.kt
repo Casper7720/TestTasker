@@ -1,24 +1,23 @@
 package com.example.testapp.presentation.dialogs.addTask
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.app.*
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.media.AudioAttributes
+import android.media.RingtoneManager
 import android.os.Bundle
-import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.testapp.R
 import com.example.testapp.databinding.DialogAddTaskBinding
-import com.example.testapp.presentation.NotifyWorker
+import com.example.testapp.presentation.AlarmReceiver
 import com.example.testapp.presentation.dialogs.bottomSheetBase.BaseBottomSheetDialogFragment
+import com.example.testapp.presentation.screens.activity.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.ZoneId
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddTaskBinding>(
@@ -29,7 +28,7 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
     override val binding: DialogAddTaskBinding by viewBinding(DialogAddTaskBinding::bind)
 
     private var dateAndTime: Calendar =
-        Calendar.getInstance(TimeZone.getTimeZone(ZoneId.systemDefault()))
+        GregorianCalendar.getInstance(TimeZone.getTimeZone(ZoneId.systemDefault()))
 
 
     override fun initialize() {
@@ -44,24 +43,14 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
             val delay = dateAndTime.timeInMillis - System.currentTimeMillis()
 
             viewModel.addTask(
-                System.currentTimeMillis(),
+                dateAndTime.timeInMillis,
                 binding.taskTitle.text.toString(),
                 dateAndTime,
                 delay.toString()
             )
 
-            val data =
-                Data.Builder()
-                    .putString(
-                        NotifyWorker.NOTIFICATION_DESCRIPTION,
-                        "Необходимо выполнить задачу"
-                    )
-                    .putInt(NotifyWorker.NOTIFICATION_ID,1)
-                    .putString(NotifyWorker.NOTIFICATION_TITLE, binding.taskTitle.text.toString())
-                    .build()
-
             if (delay > 0) {
-                scheduleNotification(delay, data)
+                setAlarm()
             }
 
             val bundle = Bundle()
@@ -85,27 +74,32 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
         super.setupSubscribers()
     }
 
-    private fun scheduleNotification(delay: Long, data: Data) {
-        val notificationWork = OneTimeWorkRequest.Builder(NotifyWorker::class.java)
-            .addTag(delay.toString())
-            .setInitialDelay(delay, TimeUnit.MILLISECONDS).setInputData(data).build()
+    private fun setAlarm() {
 
-        val instanceWorkManager = WorkManager.getInstance(requireContext())
-        instanceWorkManager.beginUniqueWork(
-            NotifyWorker.NOTIFICATION_WORK,
-            ExistingWorkPolicy.REPLACE,
-            notificationWork
-        ).enqueue()
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(requireContext(), AlarmReceiver::class.java)
+        intent.putExtra(AlarmReceiver.ALARM_RECEIVER_ID, dateAndTime.timeInMillis)
+        intent.putExtra(AlarmReceiver.ALARM_RECEIVER_TITLE, binding.taskTitle.text.toString())
+        intent.putExtra(AlarmReceiver.ALARM_RECEIVER_DESCRIPTION, "Необходимо выполнить задачу")
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            dateAndTime.timeInMillis.toInt(),
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateAndTime.timeInMillis, pendingIntent)
     }
-
 
     private fun showDateDialog() {
 
         val dateListener =
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                dateAndTime.set(Calendar.YEAR, year)
-                dateAndTime.set(Calendar.MONTH, month)
-                dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                dateAndTime.set(GregorianCalendar.YEAR, year)
+                dateAndTime.set(GregorianCalendar.MONTH, month)
+                dateAndTime.set(GregorianCalendar.DAY_OF_MONTH, dayOfMonth)
 
                 showTimeDialog()
             }
@@ -113,26 +107,24 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
         DatePickerDialog(
             requireContext(),
             dateListener,
-            dateAndTime.get(Calendar.YEAR),
-            dateAndTime.get(Calendar.MONTH),
-            dateAndTime.get(Calendar.DAY_OF_MONTH)
+            dateAndTime.get(GregorianCalendar.YEAR),
+            dateAndTime.get(GregorianCalendar.MONTH),
+            dateAndTime.get(GregorianCalendar.DAY_OF_MONTH)
         ).show()
     }
 
     private fun showTimeDialog() {
         val timeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-            dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            dateAndTime.set(Calendar.MINUTE, minute)
+            dateAndTime.set(GregorianCalendar.HOUR_OF_DAY, hourOfDay)
+            dateAndTime.set(GregorianCalendar.MINUTE, minute)
         }
 
         TimePickerDialog(
             requireContext(),
             timeListener,
-            dateAndTime.get(Calendar.HOUR_OF_DAY),
-            dateAndTime.get(Calendar.MINUTE),
+            dateAndTime.get(GregorianCalendar.HOUR_OF_DAY),
+            dateAndTime.get(GregorianCalendar.MINUTE),
             true
         ).show()
     }
-
-
 }

@@ -41,12 +41,7 @@ class ChapterFragment : BaseFragment<ChapterViewModel, FragmentChapterBinding>(
 
         favoriteChapterAdapter = ChapterAdapter()
 
-        favoriteChapterAdapter.setListener(object: ChapterVH.ChapterItemListener{
-            override fun onColorClick() {
-                getRouter().navigateTo(Screens.task())
-            }
 
-        })
 
 
         binding.chaptersRv.apply {
@@ -58,6 +53,25 @@ class ChapterFragment : BaseFragment<ChapterViewModel, FragmentChapterBinding>(
 
     override fun setupListeners() {
         super.setupListeners()
+
+        favoriteChapterAdapter.setListener(object: ChapterVH.ChapterItemListener{
+            override fun onColorClick() {
+                getRouter().navigateTo(Screens.task())
+            }
+
+        })
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.search -> {true}
+                R.id.notification -> {true}
+                R.id.settings -> {
+                    getRouter().navigateTo(Screens.settings())
+                    true
+                }
+                else -> {false}
+            }
+        }
     }
 
     override fun setupRequests() {

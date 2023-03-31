@@ -4,12 +4,10 @@ import arrow.core.Either
 import com.example.testapp.data.dao.FavoriteChapterDao
 import com.example.testapp.data.entity.FavoriteChapterEntity
 import com.example.testapp.data.repositories.BaseRepository
-import com.example.testapp.data.webservice.Api
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class FavoriteChapterRepositoryImpl @Inject constructor(
-    private val userApi: Api,
     private val favoriteChapterDao: FavoriteChapterDao
 ) : BaseRepository(), FavoriteChapterRepository {
 
@@ -23,9 +21,8 @@ class FavoriteChapterRepositoryImpl @Inject constructor(
             true
         }
 
-    override fun addDefaultChapters(chaptersEntity: List<FavoriteChapterEntity>): Flow<Either<String, Boolean>> =
+    override fun addDefaultChapters(chaptersEntity: List<FavoriteChapterEntity>): Flow<Either<String, Unit>> =
         doRequest {
             favoriteChapterDao.add(chaptersEntity)
-            true
         }
 }

@@ -18,4 +18,14 @@
     <string name="go">go</string>
     <string name="tasker">Tasker</string>
     <string name="first_step">first_step</string>
+    <string name="Settings">Настройки</string>
+    <string name="productivity">Продуктивность</string>
+    <string name="notification_ru">Уведомления</string>
+    <string name="morning_summary">Утренняя сводка</string>
+    <string name="night_summary">Вечерний обзор</string>
+    <string name="organize_tasks_for_tomorrow">Организуйте задачи на день</string>
+    <string name="Check_out_whats_left_to_do">Проверьте, что осталось сделать</string>
+    <string name="Transfer_notification_in">Отправлять уведомления в</string>
+    <string name="check_tasks">Проверь задачи на сегодня</string>
+    <string name="create_tasks_on_next_day">Заполни планы на завтра</string>
 </resources>

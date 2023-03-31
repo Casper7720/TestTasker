@@ -1,9 +1,8 @@
 package com.example.testapp.presentation.screens.activity.main
 
-import androidx.lifecycle.ViewModel
-import com.example.testapp.domain.interactors.AddDefaultValueInteractor
-import com.example.testapp.presentation.models.ChapterItem
-import com.example.testapp.presentation.models.UIState
+
+import com.example.testapp.domain.useCases.AddDefaultChaptersUseCase
+import com.example.testapp.domain.useCases.notification.AddDefaultDayNightNotificationsUseCase
 import com.example.testapp.presentation.screens.fragments.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,13 +10,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val addDefaultValueInteractor: @JvmSuppressWildcards AddDefaultValueInteractor
+    private val addDefaultDayNightNotificationsUseCase: @JvmSuppressWildcards AddDefaultDayNightNotificationsUseCase,
+    private val addDefaultChaptersUseCase: @JvmSuppressWildcards AddDefaultChaptersUseCase,
 ): BaseViewModel() {
 
-    private val _defaultData = MutableUIStateFlow<Boolean>()
-    val defaultData = _defaultData.asStateFlow()
+    private val _defaultDayNightNotifications = MutableUIStateFlow<Unit>()
+    val defaultDayNightNotifications = _defaultDayNightNotifications.asStateFlow()
+
+    private val _defaultChapters = MutableUIStateFlow<Unit>()
+    val defaultChapters = _defaultChapters.asStateFlow()
 
     fun addDefaultData(){
-        addDefaultValueInteractor().collectRequest(_defaultData){it}
+        addDefaultChaptersUseCase().collectRequest(_defaultChapters){it}
+        addDefaultDayNightNotificationsUseCase().collectRequest(_defaultDayNightNotifications){it}
     }
 }
