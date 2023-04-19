@@ -1,5 +1,7 @@
 package com.example.testapp.presentation.screens.activity.base
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +16,12 @@ import com.example.testapp.presentation.models.UIState
 import com.example.testapp.presentation.screens.fragments.base.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.zeugmasolutions.localehelper.LocaleHelper
+import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegate
+import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegateImpl
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.*
 
 abstract class BaseActivity<ViewModel : BaseViewModel, Binding : ViewBinding>(
     @LayoutRes layoutId: Int
@@ -26,9 +32,40 @@ abstract class BaseActivity<ViewModel : BaseViewModel, Binding : ViewBinding>(
 
     fun getRouter(): Router = App.INSTANCE.router
 
+    private val localeDelegate: LocaleHelperActivityDelegate = LocaleHelperActivityDelegateImpl()
+
+    override fun getDelegate() = localeDelegate.getAppCompatDelegate(super.getDelegate())
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(localeDelegate.attachBaseContext(newBase))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        localeDelegate.onResumed(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        localeDelegate.onPaused()
+    }
+
+    override fun createConfigurationContext(overrideConfiguration: Configuration): Context {
+        val context = super.createConfigurationContext(overrideConfiguration)
+        return LocaleHelper.onAttach(context)
+    }
+
+    override fun getApplicationContext(): Context =
+        localeDelegate.getApplicationContext(super.getApplicationContext())
+
+    open fun updateLocale(locale: Locale) {
+        localeDelegate.setLocale(this, locale)
+    }
+
+
     final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        localeDelegate.onCreate(this)
         initialize()
         setupListeners()
         setupRequests()

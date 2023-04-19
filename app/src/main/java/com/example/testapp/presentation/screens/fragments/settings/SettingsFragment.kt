@@ -38,6 +38,10 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         binding.notificationButton.button.setOnClickListener {
             getRouter().navigateTo(Screens.notification())
         }
+
+        binding.mainSettingsButton.button.setOnClickListener {
+            getRouter().navigateTo(Screens.mainSettings())
+        }
     }
 
     override fun setupRequests() {

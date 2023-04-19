@@ -25,18 +25,19 @@ class Converters {
     }
 
     //GregorianCalendar
-    private val gregorianCalendarTolenType = object : TypeToken<GregorianCalendar>() {}.type
+    private val gregorianCalendarTokenType = object : TypeToken<GregorianCalendar>() {}.type
+
     @TypeConverter
     fun stringToGregorianCalendar(value: String?): GregorianCalendar? {
         value ?: return null
-        return Gson().fromJson(value, gregorianCalendarTolenType)
+        return Gson().fromJson(value, gregorianCalendarTokenType)
     }
 
     @TypeConverter
     fun gregorianCalendarToString(priceInfo: GregorianCalendar?): String? {
         priceInfo ?: return null
         val gson = Gson()
-        return gson.toJson(priceInfo, gregorianCalendarTolenType)
-    }
+        return gson.toJson(priceInfo, gregorianCalendarTokenType)
 
+    }
 }

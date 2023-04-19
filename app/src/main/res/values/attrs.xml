@@ -9,6 +9,9 @@
     <declare-styleable name="ButtonWithDescription">
         <attr name="title" format="string" />
         <attr name="description" format="string"/>
+        <attr name="image" format ="reference|color"/>
+        <attr name="isVisible" format = "boolean"/>
+        <attr name="icColor" format="color"/>
     </declare-styleable>
 
 </resources>

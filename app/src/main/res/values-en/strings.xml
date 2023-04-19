@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="date">Date</string>
+    <string name="task_title">Task text</string>
+    <string name="task_toolbar_title">Tasks</string>
+    <string name="all">All</string>
+    <string name="today">Today</string>
+    <string name="Settings">Settings</string>
+    <string name="productivity">Productivity</string>
+    <string name="notification_ru">Notification</string>
+    <string name="morning_summary">Morning summary</string>
+    <string name="night_summary">Night summary</string>
+    <string name="organize_tasks_for_tomorrow">Organize tasks for tomorrow</string>
+    <string name="Check_out_whats_left_to_do">Check out whats left to do</string>
+    <string name="Transfer_notification_in">Transfer notification</string>
+    <string name="check_tasks">Check tasks</string>
+    <string name="create_tasks_on_next_day">Create tasks on next day</string>
+    <string name="main">Main</string>
+    <string name="Account">Account</string>
+    <string name="language">Language</string>
+    <string name="main_screen">Main screen</string>
+    <string name="date_and_time">Date and time</string>
+    <string name="week_start_day">Beginning of the week</string>
+    <string name="timezone">Timezone</string>
+    <string name="next_week">Next week</string>
+    <string name="weekend">Weekend</string>
+    <string name="notification_sound">Notification sound</string>
+    <string name="sound">Sound</string>
+    <string name="default_string">Default</string>
+    <string name="inbox">Inbox</string>
+</resources>

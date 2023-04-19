@@ -34,7 +34,7 @@ class ChapterViewModel @Inject constructor(
 
     fun addChapter() {
         addFavoriteChapterUseCase(1, "Входящие")
-            .collectRequest(_addFavoriteChapter){it}
+            .collectRequest(_addFavoriteChapter) { it }
     }
 
 }

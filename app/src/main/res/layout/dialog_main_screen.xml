@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_toolbar"
+        android:title="@string/main_screen" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/baseGray" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.testapp.presentation.customView.ChapterItems
+                android:id="@+id/tasks_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image="@drawable/ic_inbox"
+                app:icColor = "@color/blue"
+                app:isVisible="true"
+                app:title="@string/inbox" />
+
+            <com.example.testapp.presentation.customView.ChapterItems
+                android:id="@+id/main_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image="@drawable/ic_main"
+                app:isVisible="false"
+                app:icColor = "@color/pinkBase"
+                app:title="@string/main_screen" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

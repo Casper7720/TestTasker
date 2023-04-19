@@ -2,6 +2,7 @@ package com.example.testapp.presentation
 
 import com.example.testapp.presentation.screens.fragments.chapter.ChapterFragment
 import com.example.testapp.presentation.screens.fragments.dayNightNotification.DayNightNotificationFragment
+import com.example.testapp.presentation.screens.fragments.mainSettings.MainSettingsFragment
 import com.example.testapp.presentation.screens.fragments.notification.NotificationFragment
 import com.example.testapp.presentation.screens.fragments.settings.SettingsFragment
 import com.example.testapp.presentation.screens.fragments.task.TaskFragment
@@ -15,4 +16,6 @@ object Screens {
     fun dayNightNotification(isDay: Boolean) = FragmentScreen {
         DayNightNotificationFragment.getNewInstance(isDay)
     }
+
+    fun mainSettings() = FragmentScreen{ MainSettingsFragment() }
 }

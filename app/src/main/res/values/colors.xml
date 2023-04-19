@@ -5,12 +5,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#00CF00</color>
+    <color name="green">#32CD32</color>
 
     <color name="pink">#fff0f5</color>
     <color name="pinkBase">#E0908D</color>
     <color name="baseGray">#fafafa</color>
     <color name="gray">#C0C0C0</color>
+    <color name="darkGray">#808080</color>
+    <color name="blue">#87CEFA</color>
 
     <color name="transparent">#00000000</color>
 

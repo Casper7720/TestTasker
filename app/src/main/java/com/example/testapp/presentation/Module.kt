@@ -3,10 +3,13 @@ package com.example.testapp.presentation
 import android.content.Context
 import androidx.room.Room
 import com.example.testapp.data.Converters
+import com.example.testapp.data.dao.AppInfoDao
 import com.example.testapp.data.dao.FavoriteChapterDao
 import com.example.testapp.data.dao.NotificationDao
 import com.example.testapp.data.dao.TasksDao
 import com.example.testapp.data.db.AppDatabase
+import com.example.testapp.data.repositories.appInfoRepository.AppInfoRepository
+import com.example.testapp.data.repositories.appInfoRepository.AppInfoRepositoryImpl
 import com.example.testapp.data.repositories.favoriteChapterRepository.FavoriteChapterRepository
 import com.example.testapp.data.repositories.favoriteChapterRepository.FavoriteChapterRepositoryImpl
 import com.example.testapp.data.repositories.notificationRepository.NotificationRepository
@@ -49,6 +52,9 @@ abstract class RepositoriesModule {
 
     @Binds
     abstract fun bindNotificationRepository(notificationRepository: NotificationRepositoryImpl): NotificationRepository
+
+    @Binds
+    abstract fun bindAppInfoRepository(appInfoRepository: AppInfoRepositoryImpl): AppInfoRepository
 }
 
 @InstallIn(SingletonComponent::class)
@@ -58,12 +64,14 @@ class DatabaseModule {
     fun provideFavoriteChapterDao(appDatabase: AppDatabase): FavoriteChapterDao =
         appDatabase.favoriteChapterDao
 
-
     @Provides
     fun provideTasksDao(appDatabase: AppDatabase): TasksDao = appDatabase.tasksDao
 
     @Provides
     fun provideNotificationDao(appDatabase: AppDatabase): NotificationDao = appDatabase.notificationDao
+
+    @Provides
+    fun provideAppInfoDao(appDatabase: AppDatabase): AppInfoDao = appDatabase.appInfoDao
 
     @Singleton
     @Provides

@@ -1,5 +1,6 @@
 package com.example.testapp.presentation.screens.fragments.dayNightNotification
 
+import androidx.lifecycle.viewModelScope
 import com.example.testapp.data.entity.NotificationEntity
 import com.example.testapp.domain.useCases.notification.GetNotificationsUseCase
 import com.example.testapp.domain.useCases.notification.UpdateActiveDayNightNotificationUseCase
@@ -7,6 +8,7 @@ import com.example.testapp.domain.useCases.notification.UpdateDateDayNightNotifi
 import com.example.testapp.presentation.screens.fragments.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 

@@ -96,7 +96,7 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
     private fun showDateDialog() {
 
         val dateListener =
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 dateAndTime.set(GregorianCalendar.YEAR, year)
                 dateAndTime.set(GregorianCalendar.MONTH, month)
                 dateAndTime.set(GregorianCalendar.DAY_OF_MONTH, dayOfMonth)
@@ -114,7 +114,7 @@ class AddTaskDialog : BaseBottomSheetDialogFragment<AddTaskViewModel, DialogAddT
     }
 
     private fun showTimeDialog() {
-        val timeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+        val timeListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             dateAndTime.set(GregorianCalendar.HOUR_OF_DAY, hourOfDay)
             dateAndTime.set(GregorianCalendar.MINUTE, minute)
         }

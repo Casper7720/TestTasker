@@ -1,11 +1,13 @@
 package com.example.testapp.presentation.dialogs.bottomSheetBase
 
+import android.R
+import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -14,10 +16,13 @@ import com.example.testapp.presentation.App
 import com.example.testapp.presentation.models.UIState
 import com.example.testapp.presentation.screens.fragments.base.BaseViewModel
 import com.github.terrakok.cicerone.Router
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+
 
 abstract class BaseBottomSheetDialogFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(
     @LayoutRes layoutId: Int
@@ -62,6 +67,19 @@ abstract class BaseBottomSheetDialogFragment<ViewModel : BaseViewModel, Binding 
                 collect()
             }
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val bottomSheetDialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+        bottomSheetDialog.setOnShowListener { dialog ->
+            val dialog = dialog as BottomSheetDialog
+            val bottomSheet = dialog.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+            BottomSheetBehavior.from<FrameLayout?>(bottomSheet!!).state =
+                BottomSheetBehavior.STATE_EXPANDED
+            BottomSheetBehavior.from<FrameLayout?>(bottomSheet).skipCollapsed = true
+            BottomSheetBehavior.from<FrameLayout?>(bottomSheet).isHideable = true
+        }
+        return bottomSheetDialog
     }
 
     /**

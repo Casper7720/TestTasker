@@ -1,0 +1,225 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.fragments.settings.SettingsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/language"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textFontWeight="800"
+                android:textSize="12sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="1dp"
+                android:layout_marginVertical="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/language_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/language"
+                        app:description = "Автоматический выбор"/>
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/main_screen"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textFontWeight="800"
+                android:textSize="12sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="1dp"
+                android:layout_marginVertical="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/main_screen_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/main_screen"
+                        app:description = "@string/today"/>
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/date_and_time"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textFontWeight="800"
+                android:textSize="12sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="1dp"
+                android:layout_marginVertical="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/date_and_time_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/timezone"
+                        app:description = "Москва"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="40dp"
+                        android:background="@color/baseGray"/>
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/week_start_day_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/week_start_day"
+                        app:description = "Понедельник"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="40dp"
+                        android:background="@color/baseGray"/>
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/next_week_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/next_week"
+                        app:description = "Понедельник"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="40dp"
+                        android:background="@color/baseGray"/>
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/weekend_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/weekend"
+                        app:description = "Суббота"/>
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/sound"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textFontWeight="800"
+                android:textSize="12sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="1dp"
+                android:layout_marginVertical="4dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.example.testapp.presentation.customView.ButtonSettingsChoice
+                        android:id="@+id/notification_sound_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/notification_sound"
+                        app:description = "@string/default_string"/>
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
